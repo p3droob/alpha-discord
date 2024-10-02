@@ -1,0 +1,285 @@
+const Package = (exports.Package = require('../../package.json'));
+
+exports.version = Package.version;
+
+exports.UserAgent = `DiscordBot (${Package.homepage} ${Package.version}) Node.js/${process.version}`;
+
+exports.WSCodes = {
+  1000: 'WS_CLOSE_REQUESTED',
+  4004: 'TOKEN_INVALID',
+  4010: 'SHARDING_INVALID',
+  4011: 'SHARDING_REQUIRED',
+  4013: 'INVALID_INTENTS',
+  4014: 'DISALLOWED_INTENTS',
+};
+
+exports.Avatars = [
+  'https://cdn.discordapp.com/embed/avatars/0.png',
+  'https://cdn.discordapp.com/embed/avatars/1.png',
+  'https://cdn.discordapp.com/embed/avatars/2.png',
+  'https://cdn.discordapp.com/embed/avatars/3.png',
+  'https://cdn.discordapp.com/embed/avatars/4.png'
+];
+
+exports.Endpoints = {
+  USER: id => `/users/${id}`,
+  USER_GUILDS: id => `/users/${id}/guilds`,
+  CHANNEL_MESSAGES: id => `/channels/${id}/messages`,
+  CHANNEL: id => `/channels/${id}`,
+  GUILD_MEMBER: (guildId, userId) => `/guilds/${guildId}/members/${userId}`,
+  GUILD_MEMBERS: id => `/guilds/${id}/members`,
+  CHANNEL_MESSAGE: (channelId, messageId) => `/channels/${channelId}/messages/${messageId}`,
+  BAN_MEMBER: (guildId, memberId) => `/guilds/${guildId}/bans/${memberId}`,
+  GUILD: id => `/guilds/${id}`,
+  GUILDS: `/guilds`,
+  GUILD_CHANNELS: (id) => `/guilds/${id}/channels`,
+  GUILD_EMOJI: (guildId, emojiId) => `/guilds/${guildId}/emojis/${emojiId}`,
+  GUILD_EMOJIS: id => `/guilds/${id}/emojis`,
+  GUILD_MEMBERS: id => `/guilds/${id}/members`,
+  CREATE_REACTION: (channelId, messageId, emoji) => `/channels/${channelId}/messages/${messageId}/reactions/${emoji}/@me`,
+  ME_GUILDS: `/users/@me/guilds`,
+  ME_GUILD: (id) => `/users/@me/guilds/${id}`,
+  ME_USER: `/users/@me`
+};
+
+exports.Intents = {
+  GUILDS: 1 << 0,
+  GUILD_MEMBERS: 1 << 1,
+  GUILD_BANS: 1 << 2,
+  GUILD_EMOJIS_AND_STICKERS: 1 << 3,
+  GUILD_INTEGRATIONS: 1 << 4,
+  GUILD_WEBHOOKS: 1 << 5,
+  GUILD_INVITES: 1 << 6,
+  GUILD_VOICE_STATES: 1 << 7,
+  GUILD_PRESENCES: 1 << 8,
+  GUILD_MESSAGES: 1 << 9,
+  GUILD_MESSAGE_REACTIONS: 1 << 10,
+  GUILD_MESSAGE_TYPING: 1 << 11,
+  DIRECT_MESSAGES: 1 << 12,
+  DIRECT_MESSAGE_REACTIONS: 1 << 13,
+  DIRECT_MESSAGE_TYPING: 1 << 14
+};
+
+exports.UserFlags = {
+  BitFields: {
+    STAFF: 1 << 0,
+    PARTNER: 1 << 1,
+    HYPESQUAD: 1 << 2,
+    BUG_HUNTER_LEVEL_1: 1 << 3,
+    HYPESQUAD_ONLINE_HOUSE_1: 1 << 6,
+    HYPESQUAD_ONLINE_HOUSE_2: 1 << 7,
+    HYPESQUAD_ONLINE_HOUSE_3: 1 << 8,
+    PREMIUM_EARLY_SUPPORTER: 1 << 9,
+    TEAM_PSEUDO_USER: 1 << 10,
+    BUG_HUNTER_LEVEL_2: 1 << 14,
+    VERIFIED_BOT: 1 << 16,
+    VERIFIED_DEVELOPER: 1 << 17,
+    CERTIFIED_MODERATOR: 1 << 18,
+  },
+  Descriptions: {
+    1:'Discord Employee',
+    2: 'Partnered Server Owner',
+    4: 'HypeSquad Events Coordinator',
+    8: 'Bug Hunter Level 1',
+    64: 'House Bravery Member',
+    128: 'House Brilliance Member',
+    256: 'House Balance Member',
+    512: 'Early Nitro Supporter',
+    1024: 'User is a team',
+    16384: 'Bug Hunter Level 2',
+    65536: 'Verified Bot',
+    131072: 'Early Verified Bot Developer',
+    262144: 'Discord Certified Moderator',
+  },
+  BitConversor: {
+    1:'STAFF',
+    2: 'PARTNER',
+    4: 'HYPESQUAD',
+    8: 'BUG_HUNTER_LEVEL_1',
+    64: 'HYPESQUAD_ONLINE_HOUSE_1',
+    128: 'HYPESQUAD_ONLINE_HOUSE_2',
+    256: 'HYPESQUAD_ONLINE_HOUSE_3',
+    512: 'PREMIUM_EARLY_SUPPORTER',
+    1024: 'TEAM_PSEUDO_USER',
+    16384: 'BUG_HUNTER_LEVEL_2',
+    65536: 'VERIFIED_BOT',
+    131072: 'VERIFIED_DEVELOPER',
+    262144: 'CERTIFIED_MODERATOR',
+  }
+}
+
+exports.Nitro = {
+  0: null,
+  1: 'Nitro Classic',
+  2: 'Nitro',
+  null: 0,
+  Nitro_Classic: 1,
+  Nitro: 2,
+}
+
+exports.AllowedImageFormats = ['webp', 'png', 'jpg', 'jpeg', 'gif'];
+
+exports.Avatars = 
+
+exports.AllowedImageSizes = [16, 32, 56, 64, 96, 128, 256, 300, 512, 600, 1024, 2048, 4096];
+
+exports.Status = {
+  READY: 0,
+  CONNECTING: 1,
+  RECONNECTING: 2,
+  IDLE: 3,
+  NEARLY: 4,
+  DISCONNECTED: 5,
+  WAITING_FOR_GUILDS: 6,
+  IDENTIFYING: 7,
+  RESUMING: 8,
+};
+
+exports.Opcodes = {
+  DISPATCH: 0,
+  HEARTBEAT: 1,
+  IDENTIFY: 2,
+  STATUS_UPDATE: 3,
+  VOICE_STATE_UPDATE: 4,
+  VOICE_GUILD_PING: 5,
+  RESUME: 6,
+  RECONNECT: 7,
+  REQUEST_GUILD_MEMBERS: 8,
+  INVALID_SESSION: 9,
+  HELLO: 10,
+  HEARTBEAT_ACK: 11,
+};
+
+exports.Events = {
+  RATE_LIMIT: 'rateLimit',
+  INVALID_REQUEST_WARNING: 'invalidRequestWarning',
+  API_RESPONSE: 'apiResponse',
+  API_REQUEST: 'apiRequest',
+  READY: 'ready',
+  APPLICATION_COMMAND_CREATE: 'applicationCommandCreate',
+  APPLICATION_COMMAND_DELETE: 'applicationCommandDelete',
+  APPLICATION_COMMAND_UPDATE: 'applicationCommandUpdate',
+  GUILD_CREATE: 'guildCreate',
+  GUILD_DELETE: 'guildDelete',
+  GUILD_UPDATE: 'guildUpdate',
+  GUILD_UNAVAILABLE: 'guildUnavailable',
+  GUILD_MEMBER_ADD: 'guildMemberAdd',
+  GUILD_MEMBER_REMOVE: 'guildMemberRemove',
+  GUILD_MEMBER_UPDATE: 'guildMemberUpdate',
+  GUILD_MEMBER_AVAILABLE: 'guildMemberAvailable',
+  GUILD_MEMBERS_CHUNK: 'guildMembersChunk',
+  GUILD_INTEGRATIONS_UPDATE: 'guildIntegrationsUpdate',
+  GUILD_ROLE_CREATE: 'roleCreate',
+  GUILD_ROLE_DELETE: 'roleDelete',
+  INVITE_CREATE: 'inviteCreate',
+  INVITE_DELETE: 'inviteDelete',
+  GUILD_ROLE_UPDATE: 'roleUpdate',
+  GUILD_EMOJI_CREATE: 'emojiCreate',
+  GUILD_EMOJI_DELETE: 'emojiDelete',
+  GUILD_EMOJI_UPDATE: 'emojiUpdate',
+  GUILD_BAN_ADD: 'guildBanAdd',
+  GUILD_BAN_REMOVE: 'guildBanRemove',
+  CHANNEL_CREATE: 'channelCreate',
+  CHANNEL_DELETE: 'channelDelete',
+  CHANNEL_UPDATE: 'channelUpdate',
+  CHANNEL_PINS_UPDATE: 'channelPinsUpdate',
+  MESSAGE_CREATE: 'messageCreate',
+  MESSAGE_DELETE: 'messageDelete',
+  MESSAGE_UPDATE: 'messageUpdate',
+  MESSAGE_BULK_DELETE: 'messageDeleteBulk',
+  MESSAGE_REACTION_ADD: 'messageReactionAdd',
+  MESSAGE_REACTION_REMOVE: 'messageReactionRemove',
+  MESSAGE_REACTION_REMOVE_ALL: 'messageReactionRemoveAll',
+  MESSAGE_REACTION_REMOVE_EMOJI: 'messageReactionRemoveEmoji',
+  THREAD_CREATE: 'threadCreate',
+  THREAD_DELETE: 'threadDelete',
+  THREAD_UPDATE: 'threadUpdate',
+  THREAD_LIST_SYNC: 'threadListSync',
+  THREAD_MEMBER_UPDATE: 'threadMemberUpdate',
+  THREAD_MEMBERS_UPDATE: 'threadMembersUpdate',
+  USER_UPDATE: 'userUpdate',
+  PRESENCE_UPDATE: 'presenceUpdate',
+  VOICE_SERVER_UPDATE: 'voiceServerUpdate',
+  VOICE_STATE_UPDATE: 'voiceStateUpdate',
+  TYPING_START: 'typingStart',
+  WEBHOOKS_UPDATE: 'webhookUpdate',
+  INTERACTION_CREATE: 'interactionCreate',
+  ERROR: 'error',
+  WARN: 'warn',
+  DEBUG: 'debug',
+  SHARD_DISCONNECT: 'shardDisconnect',
+  SHARD_ERROR: 'shardError',
+  SHARD_RECONNECTING: 'shardReconnecting',
+  SHARD_READY: 'shardReady',
+  SHARD_RESUME: 'shardResume',
+  INVALIDATED: 'invalidated',
+  RAW: 'raw',
+  STAGE_INSTANCE_CREATE: 'stageInstanceCreate',
+  STAGE_INSTANCE_UPDATE: 'stageInstanceUpdate',
+  STAGE_INSTANCE_DELETE: 'stageInstanceDelete',
+  GUILD_STICKER_CREATE: 'stickerCreate',
+  GUILD_STICKER_DELETE: 'stickerDelete',
+  GUILD_STICKER_UPDATE: 'stickerUpdate'
+};
+
+exports.ShardEvents = {
+  CLOSE: 'close',
+  DESTROYED: 'destroyed',
+  INVALID_SESSION: 'invalidSession',
+  READY: 'ready',
+  RESUMED: 'resumed',
+  ALL_READY: 'allReady',
+};
+
+exports.Colors = {
+  DEFAULT: 0x000000,
+  WHITE: 0xffffff,
+  AQUA: 0x1abc9c,
+  GREEN: 0x57f287,
+  BLUE: 0x3498db,
+  YELLOW: 0xfee75c,
+  PURPLE: 0x9b59b6,
+  PINK: 0xe91e63,
+  GOLD: 0xf1c40f,
+  ORANGE: 0xe67e22,
+  RED: 0xed4245,
+  GREY: 0x95a5a6,
+  DARK_AQUA: 0x11806a,
+  DARK_GREEN: 0x1f8b4c,
+  DARK_BLUE: 0x206694,
+  DARK_PURPLE: 0x71368a,
+  DARK_VIVID_PINK: 0xad1457,
+  DARK_GOLD: 0xc27c0e,
+  DARK_ORANGE: 0xa84300,
+  DARK_RED: 0x992d22,
+  DARK_GREY: 0x979c9f,
+  DARKER_GREY: 0x7f8c8d,
+  LIGHT_GREY: 0xbcc0c0,
+  DARK_NAVY: 0x2c3e50,
+  BLURPLE: 0x5865f2,
+};
+
+exports.ChannelTypes = {
+  GUILD_TEXT: 0,
+  DM: 1,
+  GUILD_VOICE: 2,
+  GROUP_DM: 3,
+  GUILD_CATEGORY: 4,
+  GUILD_NEWS: 5,
+  GUILD_STORE: 6,
+  GUILD_NEWS_THREAD: 10,
+  GUILD_PUBLIC_THREAD: 11,
+  GUILD_PRIVATE_THREAD: 12,
+  GUILD_STAGE_VOICE: 13,
+  0: 'GUILD_TEXT',
+  1: 'DM',
+  2: 'GUILD_VOICE',
+  3: 'v',
+  4: 'GUILD_CATEGORY',
+  5: 'GUILD_NEWS',
+  6: 'GUILD_STORE',
+  10: 'GUILD_NEWS_THREAD',
+  11: 'GUILD_PUBLIC_THREAD',
+  12: 'GUILD_PRIVATE_THREAD',
+  13: 'GUILD_STAGE_VOICE'
+};
